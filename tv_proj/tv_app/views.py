@@ -7,7 +7,7 @@ def index(request):
 
 
 def shows_new(request):
-    return render(request, 'shows/new.html')
+    return render(request, 'new.html')
 
 
 def shows(request):

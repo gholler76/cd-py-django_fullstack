@@ -14,18 +14,18 @@
 
 <div class="container-fluid">
     <div class="row justify-content-center">
-        <a href="/shows">Go Back</a>
         <div class="col-3">
             <h1>Add a New Show</h1>
-            <form action="/shows/create" method="post">
+            <form class="form-group" action="/shows/create" method="post">
+                {% csrf_token %}
                 <label for="title">Title</label>
-                <input type="text" name="title">
+                <input class="form-control" type="text" name="title">
                 <label for="network">Network</label>
-                <input type="text" name="network">
+                <input class="form-control" type="text" name="network">
                 <label for="date">Release Date</label>
-                <input type="date" name="date">
+                <input class="form-control" type="date" name="date">
                 <label for="desc">Description</label>
-                <textarea name="desc" rows="5"></textarea>
+                <textarea class="form-control mb-2" name="desc" rows="5"></textarea>
                 <button type="submit" class="btn btn-primary btn-md">Create Show</button>
             </form>
         </div>
