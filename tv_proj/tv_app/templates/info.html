@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+{% endblock head %}
+
+{% block title %}
+{{ block.super }} - Show Info
+{% endblock title %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row justify-content-start d-block pb-2">
+        <h1>TV Show {{ show.id }}</h1>
+        <h3>Title: {{ show.title }}</h3>
+        <h3>Network: {{ show.network }} </h3>
+        <h3>Release Date: {{ show.date }} </h3>
+        <h3>Description: {{show.desc }} </h3>
+    </div>
+    <div class="row justify-content-center d-block pb-2">
+        <h4>Last Updated: {{ show.updated_at }}</h4>
+        <a href="/shows/{{ show.id }}/edit">Edit</a> | <a href="/shows/{{ show.id }}/destroy">Delete</a>
+    </div>
+</div>
+
+
+{% endblock content %}
