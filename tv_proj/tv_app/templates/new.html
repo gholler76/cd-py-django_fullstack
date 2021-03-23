@@ -16,6 +16,13 @@
     <div class="row justify-content-center">
         <div class="col-3">
             <h1>Add a New Show</h1>
+            {% if messages %}
+            <ul class="messages">
+                    {% for message in messages %}
+                        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+            </ul>
+            {% endif %}
             <form class="form-group" action="/shows/create" method="post">
                 {% csrf_token %}
                 <label for="title">Title</label>
@@ -25,7 +32,7 @@
                 <label for="date">Release Date</label>
                 <input class="form-control" type="date" name="date">
                 <label for="desc">Description</label>
-                <textarea class="form-control mb-2" name="desc" rows="5"></textarea>
+                <input class="form-control mb-2" name="desc"></input>
                 <button type="submit" class="btn btn-primary btn-md">Create Show</button>
             </form>
         </div>

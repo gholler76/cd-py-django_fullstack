@@ -16,6 +16,13 @@
     <div class="row justify-content-center">
         <div class="col-4">
             <h1>Edit Show {{ show.id }} </h1>
+            {% if messages %}
+            <ul class="messages">
+                    {% for message in messages %}
+                        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+            </ul>
+            {% endif %}
             <form class="form-group mb-2" action="/shows/{{ show.id }}/update" method="post">
                 {% csrf_token %}
                 <label class="font-weight-bold" for="title">Title</label>
@@ -25,7 +32,7 @@
                 <label class="font-weight-bold" for="date">Release Date</label>
                 <input class="form-control font-italic" type="date" name="date" value="{{ show.date }}">
                 <label class="font-weight-bold" for="desc">Description</label>
-                <textarea class="form-control font-italic" name="desc" rows="5" value="{{ show.desc }}"></textarea>
+                <input class="form-control font-italic" name="desc" value="{{ show.desc }}"></input>
                 <button type="submit" class="btn btn-primary btn-md mt-2">Update Show</button>
             </form>
             <a href="/shows/{{ show.id }}">Go to Show</a>

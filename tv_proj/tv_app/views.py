@@ -1,5 +1,6 @@
 from django.shortcuts import HttpResponse, redirect, render
 from .models import Show
+from django.contrib import messages
 
 
 def index(request):
@@ -38,24 +39,41 @@ def shows_edit(request, num):
 
 
 def shows_update(request, num):
-    Show.objects.filter(id=num).update(
-        title=request.POST['title'],
-        network=request.POST['network'],
-        date=request.POST['date'],
-        desc=request.POST['desc']
-    )
+    errors = Show.objects.basic_validator(request.POST)
+
+    if len(errors) > 0:
+        for k, v in errors.items():
+            messages.error(request, v)
+        return redirect(shows_edit, num)
+
+    else:
+
+        Show.objects.filter(id=num).update(
+            title=request.POST['title'],
+            network=request.POST['network'],
+            date=request.POST['date'],
+            desc=request.POST['desc'])
+        messages.success(request, "Show updated successfully")
 
     return redirect(shows_info, num)
 
 
 def shows_create(request):
-    new_show = Show.objects.create(
-        title=request.POST['title'],
-        network=request.POST['network'],
-        date=request.POST['date'],
-        desc=request.POST['desc']
-    )
-    num = new_show.id
+    errors = Show.objects.basic_validator(request.POST)
+
+    if len(errors) > 0:
+        for k, v in errors.items():
+            messages.error(request, v)
+        return redirect(shows_create)
+
+    else:
+        new_show = Show.objects.create(
+            title=request.POST['title'],
+            network=request.POST['network'],
+            date=request.POST['date'],
+            desc=request.POST['desc']
+        )
+        num = new_show.id
 
     return redirect(shows_info, num)
 
