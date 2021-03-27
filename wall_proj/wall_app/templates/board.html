@@ -30,9 +30,14 @@
                         <div class="col-9 pr-2 border-right font-weight-normal text-right">
                             Welcome, {{name }}!
                         </div>
+                        <div class="col-2 pl-2 text-left">
+                            <form action="/my_account" method="GET"><a type="submit" class="small"
+                                    href="/my_acccount">Edit my
+                                    Account</a></form>
+                        </div>
                         <div class="col-3 pl-2 text-left">
-                            <form action="/hello/logout/" method="DELETE"><a type="submit" class="small"
-                                    href="/logout">log out</a></form>
+                            <form action="/logout" method="DELETE"><a type="submit" class="small" href="/logout">log
+                                    out</a></form>
                         </div>
                     </div>
                 </div>

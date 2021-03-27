@@ -64,7 +64,7 @@ def shows_create(request):
     if len(errors) > 0:
         for k, v in errors.items():
             messages.error(request, v)
-        return redirect(shows_create)
+        return redirect('/shows/new')
 
     else:
         new_show = Show.objects.create(

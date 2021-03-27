@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import date, datetime
 
 
 class ShowManager(models.Manager):
@@ -10,6 +11,10 @@ class ShowManager(models.Manager):
             errors['network'] = "Show network MUST be at least 3 characters"
         if len(postData['desc']) < 10:
             errors['desc'] = "Show description MUST be at least 10 characters"
+        create_date = datetime.strptime(postData['date'], '%Y-%m-%d')
+        today = datetime.today()
+        if create_date > today:
+            errors['past_date'] = "Date must be in the past"
         return errors
 
 
